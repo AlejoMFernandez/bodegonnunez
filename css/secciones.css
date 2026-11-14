@@ -232,17 +232,6 @@ section{scroll-margin-top:72px}
 .plato-mas span{color:var(--rojo);white-space:nowrap}
 #carta-kit .kit-item.extra{display:none}
 #carta-kit .kit-carta__panel{min-height:var(--panel-h,0px)}
-@media (max-width:767px){
-  .wow{padding:64px 20px 104px}
-  .wow .cab p{display:none}
-  .wow .stepper{display:none}
-  .gustos{margin-top:18px}
-  .mesa{margin-top:14px}
-  .ticket{padding:16px 18px 16px;margin-top:4px}
-  .ticket .t-n{font-size:23px;height:2.1em}
-  .ticket .t-d{font-size:15px}
-  .ticket .t-r{font-size:15px;min-height:2.9em}
-  .ticket .etq{margin-top:10px}
 }
 /* intro: el mismo cartel cae y se queda en el hero */
 .intro .cartel-i{background:var(--rojo);padding:16px 18px;box-shadow:inset 0 0 0 5px var(--rojo),inset 0 0 0 7px #fff,0 14px 26px rgba(60,10,10,.35);width:min(52vw,210px);transform-origin:0 0}
@@ -254,3 +243,97 @@ section{scroll-margin-top:72px}
 .hA .cartel.cae{animation:none;opacity:1}
 .con-intro .hA .cartel.cae{opacity:0}
 .sede-acc .sub{padding:4px 2px}
+
+/* ---------- 1 · mitad y mitad ---------- */
+.mym{padding:80px 20px 96px}
+.modo{display:flex;justify-content:center;margin:22px auto 0;width:max-content;max-width:100%;border:2px solid rgba(255,255,255,.5);padding:4px;gap:4px}
+.modo button{min-height:46px;padding:0 20px;font:700 17px "Barlow C";letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.modo button[aria-pressed=true]{background:#fff;color:var(--rojo)}
+.mym-grid{display:flex;flex-direction:column;gap:18px;margin-top:18px}
+.mym-fuente{order:-1;--R:min(150px,calc((100vw - 60px)/2));width:calc(var(--R)*2);height:calc(var(--R)*2);margin:0 auto;position:relative}
+.mym-fuente .fuente{left:0;top:0}
+.mym .lbl{font:700 15px "Barlow C";letter-spacing:.1em;text-transform:uppercase;color:#ffd3c9;margin:0 0 8px}
+.mym .lista{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:2px 2px 8px;scrollbar-width:none}
+.mym .lista::-webkit-scrollbar{display:none}
+.mym .lista button{flex:0 0 auto;scroll-snap-align:start;display:grid;grid-template-columns:42px auto;grid-template-rows:auto auto;column-gap:10px;align-items:center;text-align:left;
+  min-height:56px;padding:5px 16px 5px 5px;border:1.5px solid rgba(255,255,255,.3);border-radius:30px;color:#fff;transition:background .2s,border-color .2s}
+.mym .lista img{grid-row:1/3;width:42px;height:42px;border-radius:50%;object-fit:cover;background:#5a3e30}
+.mym .lista span{font:700 16px/1.1 "Barlow C";letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.mym .lista small{font:500 13px/1.2 "Barlow";color:#e9ddd5}
+.mym .lista button[aria-pressed=true]{background:#fff;border-color:#fff;color:var(--rojo)}
+.mym .lista button[aria-pressed=true] small{color:#6b5f58}
+.solo-entera{display:none}
+.mym.es-entera .solo-entera{display:inline}.mym.es-entera .solo-mitad{display:none}
+.mym.es-entera .col-b{display:none}
+.mym.es-entera .medio{opacity:0}
+.medio{transition:opacity .3s}
+.mitad.pum{animation:caeMitad .5s var(--peso)}
+@keyframes caeMitad{0%{transform:translateY(-14px)}60%{transform:translateY(3px)}100%{transform:none}}
+.mym-pie{display:grid;grid-template-columns:1fr auto;gap:12px 16px;align-items:end;max-width:760px;margin:22px auto 0;background:var(--mantel);color:var(--tinta);padding:18px 18px 18px}
+.mym-combo b{display:block;font:800 24px/1.05 "BS";text-transform:uppercase;color:var(--rojo)}
+.mym-combo span{display:block;margin-top:6px;font-size:15px;line-height:1.4;color:var(--gris)}
+.mym-precio{text-align:right}
+.mym-precio small{display:block;font:700 13px "Barlow C";letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.mym-precio strong{font:800 26px/1 "BS"}
+.mym-pie .etq{grid-column:1/-1;width:100%}
+@media (min-width:1024px){
+  .mym{padding:96px 40px 104px}
+  .mym-grid{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:36px;max-width:1240px;margin:26px auto 0}
+  .mym-fuente{order:0;--R:min(230px,calc(50vh - 140px))}
+  .mym .lista{display:flex;flex-direction:column;overflow:visible;padding:0}
+  .mym .lista button{width:100%;border-radius:4px;grid-template-columns:42px 1fr auto;grid-template-rows:auto}
+  .mym .lista img{grid-row:auto}
+  .mym .lista small{text-align:right}
+  .col-b .lbl{text-align:right}
+  .mym.es-entera .mym-grid{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+  .mym-pie{grid-template-columns:1fr auto auto;align-items:center;padding:20px 24px;margin-top:30px}
+  .mym-pie .etq{grid-column:auto;width:auto}
+}
+/* ---------- 2 · ¿para cuántos? ---------- */
+.cuantos{background:var(--rojo);color:#fff;padding:80px 20px 96px;overflow:clip}
+.cuantos .cab{text-align:center}
+.cuantos .script{font:400 clamp(30px,4vw,44px)/1 "Yellowtail";color:#ffd3c9}
+.cuantos h2{font:800 clamp(46px,8vw,96px)/.95 "BS";text-transform:uppercase;margin:.12em 0 .2em}
+.cuantos .cab p{max-width:34ch;margin:0 auto;color:#f6e3e0}
+.cuantos .stepper{margin-top:18px}
+.cuantos .stepper button{color:#fff}
+.cuantos .sello{background:#171414;box-shadow:0 0 0 4px #171414,0 0 0 6px #fff,0 8px 18px rgba(0,0,0,.4)}
+.cuantos .xmilas{color:var(--rojo)}
+.cuantos .ticket{margin-top:18px}
+.t-k{font:700 14px "Barlow C";letter-spacing:.1em;text-transform:uppercase;color:var(--rojo);margin:0 0 6px}
+.t-l{list-style:none;margin:0;padding:0}
+.t-l li{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-top:1.5px dashed #d8cec3}
+.t-l li:first-child{border-top:0}
+.t-l b{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--rojo);color:#fff;font:800 19px/1 "BS"}
+.t-l strong{display:block;font:800 21px/1.05 "BS";text-transform:uppercase}
+.t-l small{display:block;margin-top:3px;font-size:14.5px;line-height:1.35;color:var(--gris)}
+.t-l small a{color:var(--rojo);font-weight:600;display:inline-block;padding:4px 0}
+.t-l span{font:700 15px "Barlow C";white-space:nowrap;padding-top:3px}
+.cuantos .t-c strong{font-size:24px}
+.t-p{margin:2px 0 0;font-size:15px;color:var(--gris);min-height:1.4em}
+.t-nota{margin:10px 0 0;font-size:13px;color:#7a6e67;text-align:center}
+@media (min-width:1024px){
+  .cuantos{padding:96px 40px 104px}
+  .cu-grid{display:grid;grid-template-columns:minmax(0,.9fr) auto minmax(0,1.1fr);align-items:center;gap:40px;max-width:1320px;margin:0 auto}
+  .cuantos .cab{text-align:left}.cuantos .cab p{margin:0}
+  .cuantos .stepper{justify-content:flex-start;margin-top:26px}
+  .cuantos .mesa{--R:min(210px,calc(50vh - 160px));margin:0}
+  .cuantos .ticket{margin:0;max-width:460px}
+}
+@media (min-width:1024px){.mym .cab{text-align:center;margin:0 auto}.mym .cab p{margin:0 auto}}
+.mym .lbl .fl{font-style:normal;display:none}
+@media (min-width:1024px){
+  .mym .lbl .fl{display:inline}
+  .mym{padding-top:76px}
+  .mym h2{font-size:clamp(46px,6vw,80px)}
+  .mym .modo{margin-top:16px}
+  .mym .lista{gap:7px}
+  .mym .lista button{min-height:50px}
+  .mym .lista img{width:38px;height:38px}
+}
+@media (max-width:1023px){
+  .mym-combo{grid-column:1/-1}
+  .mym-precio{grid-column:1/-1;text-align:left;display:flex;align-items:baseline;gap:10px;border-top:1.5px dashed #cfc6bb;padding-top:10px}
+}
+.t-nota{color:#6f635c}
+.t-l small a{padding:12px 4px;margin:-12px -4px}

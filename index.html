@@ -24,17 +24,17 @@
 <link rel="preload" href="fonts/bs-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/bs-inline-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="img/fuente-640.webp" imagesrcset="img/fuente-640.webp 640w, img/fuente-900.webp 900w" imagesizes="(min-width:768px) 1150px, 150vw">
-<link rel="stylesheet" href="kit/kit.css?v=5">
-<link rel="stylesheet" href="css/base.css?v=5">
-<link rel="stylesheet" href="css/hero.css?v=5">
-<link rel="stylesheet" href="css/secciones.css?v=5">
+<link rel="stylesheet" href="kit/kit.css?v=6">
+<link rel="stylesheet" href="css/base.css?v=6">
+<link rel="stylesheet" href="css/hero.css?v=6">
+<link rel="stylesheet" href="css/secciones.css?v=6">
 </head>
 <body>
 <div class="intro" aria-hidden="true"><div class="cartel-i"><img src="img/logo-blanco.webp" width="615" height="562" alt=""></div></div>
 
 <div class="topbar">
   <a class="marca" href="#inicio"><span class="mini"><img src="img/logo-blanco.webp" width="615" height="562" alt="Bodegón Núñez"></span></a>
-  <nav aria-label="Secciones"><a href="#mila">La Mila-grosa</a><a href="#carta">Carta</a><a href="#mediodia">Mediodía</a><a href="#promos">Promos</a><a href="#sedes">Sedes</a></nav>
+  <nav aria-label="Secciones"><a href="#mila">Mitad y mitad</a><a href="#cuantos">¿Para cuántos?</a><a href="#carta">Carta</a><a href="#mediodia">Mediodía</a><a href="#promos">Promos</a><a href="#sedes">Sedes</a></nav>
   <a class="etq" href="#" data-kit-open="reservas">Reservá tu mesa</a>
 </div>
 
@@ -49,56 +49,87 @@
 </header>
 
 <main>
-<section class="wow" id="mila" aria-labelledby="wow-t">
- <div class="wow-grid">
-  <div class="izq">
-    <div class="cab rv"><span class="script">La Mila-grosa</span><h2 id="wow-t">¿Para cuántos?</h2>
-      <p>Dos gustos en una sola milanesa gigante, para cuatro. Sentá a tu gente alrededor de la fuente y te decimos cuántas pedir.</p></div>
-    <div class="mitades rv" style="--d:1" role="group" aria-label="Qué mitad estás eligiendo">
-      <button type="button" data-lado="a" aria-pressed="true">Mitad 1<em>Napolitana</em></button>
-      <button type="button" data-lado="b" aria-pressed="false">Mitad 2<em>Gran Bodegón</em></button>
-    </div>
-    <div class="gustos rv" style="--d:2" role="group" aria-label="Gustos"><button type="button" data-g="napolitana" aria-pressed="false"><img src="img/top/top-napolitana-t.webp" width="42" height="42" alt="" loading="lazy">Napolitana</button>
-<button type="button" data-g="granbodegon" aria-pressed="false"><img src="img/top/top-granbodegon-t.webp" width="42" height="42" alt="" loading="lazy">Gran Bodegón</button>
-<button type="button" data-g="gringa" aria-pressed="false"><img src="img/top/top-gringa-t.webp" width="42" height="42" alt="" loading="lazy">Gringa</button>
-<button type="button" data-g="provolone" aria-pressed="false"><img src="img/top/top-provolone-t.webp" width="42" height="42" alt="" loading="lazy">Provolone</button>
-<button type="button" data-g="calabresa" aria-pressed="false"><img src="img/top/top-calabresa-t.webp" width="42" height="42" alt="" loading="lazy">Calabresa</button>
-<button type="button" data-g="scalonesa" aria-pressed="false"><img src="img/top/top-scalonesa-t.webp" width="42" height="42" alt="" loading="lazy">La Scalonesa</button>
-<button type="button" data-g="sola" aria-pressed="false"><img src="img/top/top-sola-t.webp" width="42" height="42" alt="" loading="lazy">Sola</button></div>
+<section class="wow mym" id="mila" aria-labelledby="mym-t">
+  <div class="cab rv"><span class="script">La Mila-grosa</span><h2 id="mym-t">Mitad y mitad</h2>
+    <p>Una milanesa gigante para cuatro. Pedila entera o con un gusto distinto en cada mitad.</p></div>
+  <div class="modo rv" style="--d:1" role="group" aria-label="Cómo la querés">
+    <button type="button" data-modo="mitad" aria-pressed="true">Mitad y mitad</button><button type="button" data-modo="entera" aria-pressed="false">Entera</button>
   </div>
-  <div class="mesa rv" style="--d:1">
-    <div class="fuente">
-      <svg viewBox="28 28 344 344" role="img" aria-label="La Mila-grosa en la fuente, cortada en porciones">
+  <div class="mym-grid">
+    <div class="col col-a rv" style="--d:2"><p class="lbl"><span class="solo-mitad"><i class="fl">← </i>Mitad 1</span><span class="solo-entera">El gusto</span></p><div class="lista"><button type="button" data-g="napolitana" data-lado="a" aria-pressed="false"><img src="img/top/top-napolitana-t.webp" width="42" height="42" alt="" loading="lazy"><span>Napolitana</span><small>$65.000</small></button>
+<button type="button" data-g="granbodegon" data-lado="a" aria-pressed="false"><img src="img/top/top-granbodegon-t.webp" width="42" height="42" alt="" loading="lazy"><span>Gran Bodegón</span><small>$68.000</small></button>
+<button type="button" data-g="gringa" data-lado="a" aria-pressed="false"><img src="img/top/top-gringa-t.webp" width="42" height="42" alt="" loading="lazy"><span>Gringa</span><small>$68.000</small></button>
+<button type="button" data-g="provolone" data-lado="a" aria-pressed="false"><img src="img/top/top-provolone-t.webp" width="42" height="42" alt="" loading="lazy"><span>Provolone</span><small>$68.000</small></button>
+<button type="button" data-g="calabresa" data-lado="a" aria-pressed="false"><img src="img/top/top-calabresa-t.webp" width="42" height="42" alt="" loading="lazy"><span>Calabresa</span><small>Consultar</small></button>
+<button type="button" data-g="scalonesa" data-lado="a" aria-pressed="false"><img src="img/top/top-scalonesa-t.webp" width="42" height="42" alt="" loading="lazy"><span>La Scalonesa</span><small>Consultar</small></button>
+<button type="button" data-g="sola" data-lado="a" aria-pressed="false"><img src="img/top/top-sola-t.webp" width="42" height="42" alt="" loading="lazy"><span>Sola</span><small>$55.000</small></button></div></div>
+    <div class="mym-fuente rv" style="--d:1"><div class="fuente"><svg viewBox="28 28 344 344" role="img" aria-label="La milanesa en la fuente">
         <defs>
-          <clipPath id="cM"><path d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z"/></clipPath>
-          <clipPath id="cA"><rect x="0" y="0" width="200" height="400"/></clipPath>
-          <clipPath id="cB"><rect x="200" y="0" width="200" height="400"/></clipPath>
+          <clipPath id="cMimgA"><path d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z"/></clipPath>
+          <clipPath id="cAimgA"><rect x="0" y="0" width="200" height="400"/></clipPath>
+          <clipPath id="cBimgA"><rect x="200" y="0" width="200" height="400"/></clipPath>
         </defs>
         <g transform="rotate(-14 200 200)">
           <path class="mila-sombra" d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z" fill="#b7742f"/>
-          <g clip-path="url(#cM)">
-            <g class="mitad" data-lado="a" clip-path="url(#cA)"><image id="imgA" x="20" y="70" width="360" height="260" preserveAspectRatio="xMidYMid slice"/></g>
-            <g class="mitad" data-lado="b" clip-path="url(#cB)"><image id="imgB" x="20" y="70" width="360" height="260" preserveAspectRatio="xMidYMid slice"/></g>
+          <g clip-path="url(#cMimgA)">
+            <g class="mitad" data-lado="a" clip-path="url(#cAimgA)"><image id="imgA" x="20" y="70" width="360" height="260" preserveAspectRatio="xMidYMid slice"/></g>
+            <g class="mitad" data-lado="b" clip-path="url(#cBimgA)"><image id="imgB" x="20" y="70" width="360" height="260" preserveAspectRatio="xMidYMid slice"/></g>
             <path d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z" fill="none" stroke="#8a4e17" stroke-width="10" opacity=".55"/>
-            <g><line class="corte" x1="200" y1="70" x2="200" y2="330"/><line class="corte" x1="118" y1="70" x2="122" y2="330"/><line class="corte" x1="282" y1="70" x2="278" y2="330"/>
-               <line class="corte2" x1="203" y1="70" x2="203" y2="330"/><line class="corte2" x1="121" y1="70" x2="125" y2="330"/><line class="corte2" x1="285" y1="70" x2="281" y2="330"/></g>
+            <g class="cortes"><line class="corte medio" x1="200" y1="70" x2="200" y2="330"/><line class="corte" x1="118" y1="70" x2="122" y2="330"/><line class="corte" x1="282" y1="70" x2="278" y2="330"/>
+               <line class="corte2 medio" x1="203" y1="70" x2="203" y2="330"/><line class="corte2" x1="121" y1="70" x2="125" y2="330"/><line class="corte2" x1="285" y1="70" x2="281" y2="330"/></g>
           </g>
-          <g clip-path="url(#cA)"><path class="marco-sel" data-lado="a" d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z"/></g>
-          <g clip-path="url(#cB)"><path class="marco-sel" data-lado="b" d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z"/></g>
         </g>
-      </svg>
-      <div class="sello" aria-live="polite"><div><b>6</b><small>personas</small></div></div>
-    </div>
+      </svg></div></div>
+    <div class="col col-b rv" style="--d:3"><p class="lbl">Mitad 2<i class="fl"> →</i></p><div class="lista"><button type="button" data-g="napolitana" data-lado="b" aria-pressed="false"><img src="img/top/top-napolitana-t.webp" width="42" height="42" alt="" loading="lazy"><span>Napolitana</span><small>$65.000</small></button>
+<button type="button" data-g="granbodegon" data-lado="b" aria-pressed="false"><img src="img/top/top-granbodegon-t.webp" width="42" height="42" alt="" loading="lazy"><span>Gran Bodegón</span><small>$68.000</small></button>
+<button type="button" data-g="gringa" data-lado="b" aria-pressed="false"><img src="img/top/top-gringa-t.webp" width="42" height="42" alt="" loading="lazy"><span>Gringa</span><small>$68.000</small></button>
+<button type="button" data-g="provolone" data-lado="b" aria-pressed="false"><img src="img/top/top-provolone-t.webp" width="42" height="42" alt="" loading="lazy"><span>Provolone</span><small>$68.000</small></button>
+<button type="button" data-g="calabresa" data-lado="b" aria-pressed="false"><img src="img/top/top-calabresa-t.webp" width="42" height="42" alt="" loading="lazy"><span>Calabresa</span><small>Consultar</small></button>
+<button type="button" data-g="scalonesa" data-lado="b" aria-pressed="false"><img src="img/top/top-scalonesa-t.webp" width="42" height="42" alt="" loading="lazy"><span>La Scalonesa</span><small>Consultar</small></button>
+<button type="button" data-g="sola" data-lado="b" aria-pressed="false"><img src="img/top/top-sola-t.webp" width="42" height="42" alt="" loading="lazy"><span>Sola</span><small>$55.000</small></button></div></div>
+  </div>
+  <div class="mym-pie rv" style="--d:2">
+    <div class="mym-combo"><b data-combo>Mila-grosa Napolitana + Gran Bodegón</b><span data-combo-d></span></div>
+    <div class="mym-precio"><small>Comen 4</small><strong data-precio>Consultar</strong></div>
+    <button type="button" class="etq" data-pedir-mila>Reservá y pedila</button>
+  </div>
+</section>
+
+<section class="cuantos" id="cuantos" aria-labelledby="cu-t">
+ <div class="cu-grid">
+  <div class="izq">
+    <div class="cab rv"><span class="script">Vengan todos</span><h2 id="cu-t">¿Para cuántos?</h2>
+      <p>Tocá las sillas y te decimos qué pedir para que nadie se quede con hambre.</p></div>
+    <div class="stepper rv" style="--d:1"><button type="button" data-menos aria-label="Uno menos">−</button><span>6 personas</span><button type="button" data-mas aria-label="Uno más">+</button></div>
+  </div>
+  <div class="mesa rv" style="--d:1">
+    <div class="fuente"><svg viewBox="28 28 344 344" role="img" aria-label="La milanesa en la fuente">
+        <defs>
+          <clipPath id="cMimgC"><path d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z"/></clipPath>
+          <clipPath id="cAimgC"><rect x="0" y="0" width="200" height="400"/></clipPath>
+          <clipPath id="cBimgC"><rect x="200" y="0" width="200" height="400"/></clipPath>
+        </defs>
+        <g transform="rotate(-14 200 200)">
+          <path class="mila-sombra" d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z" fill="#b7742f"/>
+          <g clip-path="url(#cMimgC)">
+            <g class="mitad" data-lado="a" clip-path="url(#cAimgC)"><image id="imgC" x="20" y="70" width="360" height="260" preserveAspectRatio="xMidYMid slice"/></g>
+            <g class="mitad" data-lado="b" clip-path="url(#cBimgC)"><image id="imgD" x="20" y="70" width="360" height="260" preserveAspectRatio="xMidYMid slice"/></g>
+            <path d="M38,196 C30,140 70,98 140,92 C190,88 220,84 262,90 C330,100 372,140 366,200 C360,262 318,300 250,306 C200,310 160,314 118,304 C64,292 44,250 38,196 Z" fill="none" stroke="#8a4e17" stroke-width="10" opacity=".55"/>
+            <g class="cortes"><line class="corte medio" x1="200" y1="70" x2="200" y2="330"/><line class="corte" x1="118" y1="70" x2="122" y2="330"/><line class="corte" x1="282" y1="70" x2="278" y2="330"/>
+               <line class="corte2 medio" x1="203" y1="70" x2="203" y2="330"/><line class="corte2" x1="121" y1="70" x2="125" y2="330"/><line class="corte2" x1="285" y1="70" x2="281" y2="330"/></g>
+          </g>
+        </g>
+      </svg><div class="sello" aria-live="polite"><div><b>6</b><small>personas</small></div></div></div>
     <div class="xmilas" aria-hidden="true">×2</div>
   </div>
   <div class="der">
-    <div class="stepper rv" style="--d:2"><button type="button" data-menos aria-label="Uno menos">−</button><span>6 personas</span><button type="button" data-mas aria-label="Uno más">+</button></div>
-    <div class="ticket rv" style="--d:3">
-      <div class="t-n">Mila-grosa</div>
-      <p class="t-d"></p>
-      <div class="t-c"><span>Rinde 4 personas</span><strong>Consultar</strong></div>
-      <p class="t-r"></p>
+    <div class="ticket rv" style="--d:2">
+      <p class="t-k">La recomendación de la casa</p>
+      <ul class="t-l" aria-live="polite"></ul>
+      <div class="t-c"><span>Total estimado</span><strong data-total>$0</strong></div>
+      <p class="t-p" data-pp></p>
       <button type="button" class="etq" data-mesa-para data-n="6">Reservar mesa para 6</button>
+      <p class="t-nota">Precios de carta, sin servicio de mesa.</p>
     </div>
   </div>
  </div>
@@ -240,9 +271,9 @@
   <a href="#sedes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sedes</a>
 </nav>
 
-<script src="js/main.js?v=5" defer></script>
+<script src="js/main.js?v=6" defer></script>
 <script type="module">
-  import { initKit } from './kit/kit.js?v=5';
+  import { initKit } from './kit/kit.js?v=6';
   window.KIT = await initKit({ config: 'cliente.json', imagenes: false, carta: { pedir: false, template: window.BN_PLATO } });
   window.dispatchEvent(new Event('bn:kit'));
 </script>

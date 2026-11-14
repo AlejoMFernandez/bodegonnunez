@@ -50,7 +50,7 @@ const hero = $('.hero');
 if (hero) new IntersectionObserver(([e]) => H.classList.toggle('nav-on', !e.isIntersecting), { rootMargin: '-80px 0px 0px 0px' }).observe(hero);
 const ocultanPill = new Set();
 const ioPill = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? ocultanPill.add(e.target) : ocultanPill.delete(e.target)); H.classList.toggle('pill-off', ocultanPill.size > 0); }, { threshold: .1 });
-[hero, $('.wow')].forEach(el => el && ioPill.observe(el));
+[hero, $('.mym'), $('.cuantos')].forEach(el => el && ioPill.observe(el));
 
 /* ---------- fotos que se piden recién cerca de la pantalla ---------- */
 const ioSrc = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const i = e.target; i.src = i.dataset.src; i.removeAttribute('data-src'); ioSrc.unobserve(i); }), { rootMargin: '600px 0px' });
@@ -71,10 +71,50 @@ const GUSTOS = {
   scalonesa: ['La Scalonesa', 'La mila del Mundial: huevos, chorizo crocante, morrón y provoleta. Edición limitada.'],
   sola: ['Sola', 'La que no necesita nada más. Con fritas, ensalada o puré.'],
 };
-const wow = $('.wow');
-if (wow) {
-  const st = { a: 'napolitana', b: 'granbodegon', lado: 'a', n: 6 };
-  const mesa = $('.mesa', wow), sello = $('.sello', wow), xm = $('.xmilas', wow);
+const PRECIO = { sola: 55000, napolitana: 65000, granbodegon: 68000, gringa: 68000, provolone: 68000 };
+const pesos = (n) => '$' + n.toLocaleString('es-AR');
+const pesoFoto = (img, k) => img && img.setAttribute('href', `img/top/top-${k}.webp`);
+const golpe = (el) => { if (!el) return; el.classList.remove('pum'); void el.getBoundingClientRect(); el.classList.add('pum'); };
+// las fotos grandes de los gustos se cargan cuando la sección está cerca (no compiten con el hero)
+function cuandoCerca(el, fn) { new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); setTimeout(fn, H.classList.contains('abierto') ? 0 : 2200); }, { rootMargin: '300px' }).observe(el); }
+
+/* ---------- 1 · Mitad y mitad ---------- */
+const mym = $('.mym');
+let pedidoMila = '';
+if (mym) {
+  const st = { modo: 'mitad', a: 'napolitana', b: 'granbodegon' };
+  let cerca = false;
+  cuandoCerca(mym, () => { cerca = true; pintar(); Object.keys(GUSTOS).forEach(k => { const i = new Image(); i.src = `img/top/top-${k}.webp`; }); });
+  $$('[data-modo]', mym).forEach(b => b.addEventListener('click', () => { st.modo = b.dataset.modo; if (st.modo === 'entera') st.b = st.a; pintar(); }));
+  $$('.lista button', mym).forEach(b => b.addEventListener('click', () => {
+    const lado = b.dataset.lado;
+    if (st.modo === 'entera') { st.a = st.b = b.dataset.g; pintar('ab'); }
+    else { st[lado] = b.dataset.g; pintar(lado); }
+  }));
+  function pintar(cambio) {
+    mym.classList.toggle('es-entera', st.modo === 'entera');
+    $$('[data-modo]', mym).forEach(b => b.setAttribute('aria-pressed', b.dataset.modo === st.modo));
+    $$('.lista button', mym).forEach(b => b.setAttribute('aria-pressed', b.dataset.g === st[b.dataset.lado]));
+    if (cerca) { pesoFoto($('#imgA', mym), st.a); pesoFoto($('#imgB', mym), st.b); }
+    if (cambio) $$('.mitad', mym).forEach(m => { if (cambio.includes(m.dataset.lado)) golpe(m); });
+    const [na, da] = GUSTOS[st.a], [nb] = GUSTOS[st.b];
+    const misma = st.a === st.b;
+    $('[data-combo]', mym).textContent = misma ? `Milanesa ${na}, entera` : `Mila-grosa ${na} + ${nb}`;
+    $('[data-combo-d]', mym).textContent = misma ? da : `Mitad ${na.toLowerCase()}, mitad ${nb.toLowerCase()}. Con fritas, ensalada o puré.`;
+    $('[data-precio]', mym).textContent = misma && PRECIO[st.a] ? pesos(PRECIO[st.a]) : 'Consultar';
+    pedidoMila = misma ? `Queremos la milanesa ${na} entera.` : `Queremos la Mila-grosa mitad ${na} / mitad ${nb}.`;
+  }
+  pintar();
+  $('[data-pedir-mila]', mym).addEventListener('click', () => reservar({ personas: 4 }).then(() => setTimeout(() => {
+    const t = $('.kit-pop textarea[name="comentario"]'); if (t) { t.value = pedidoMila; t.dispatchEvent(new Event('input', { bubbles: true })); }
+  }, 60)));
+}
+
+/* ---------- 2 · ¿Para cuántos? ---------- */
+const cu = $('.cuantos');
+if (cu) {
+  const st = { n: 6 };
+  const mesa = $('.mesa', cu), sello = $('.sello', cu), xm = $('.xmilas', cu);
   const sillas = [];
   for (let i = 0; i < 12; i++) {
     const b = document.createElement('button');
@@ -84,38 +124,37 @@ if (wow) {
     b.addEventListener('click', () => { st.n = i + 1; pintar(true); });
     mesa.appendChild(b); sillas.push(b);
   }
-  const ubicar = () => {
-    const W = mesa.clientWidth, c = W / 2, r = c - 22;
-    sillas.forEach((b, i) => { const a = -Math.PI / 2 + (i / 12) * Math.PI * 2; b.style.left = c + r * Math.cos(a) + 'px'; b.style.top = c + r * Math.sin(a) + 'px'; });
-  };
+  const ubicar = () => { const c = mesa.clientWidth / 2, r = c - 22; sillas.forEach((b, i) => { const a = -Math.PI / 2 + (i / 12) * Math.PI * 2; b.style.left = c + r * Math.cos(a) + 'px'; b.style.top = c + r * Math.sin(a) + 'px'; }); };
   ubicar(); addEventListener('resize', ubicar);
-  // las fotos de los gustos se precargan para que al cambiar no quede la anterior
-  let cerca = false;
-  new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); setTimeout(() => { cerca = true; pintar(); Object.keys(GUSTOS).forEach(k => { const i = new Image(); i.src = `img/top/top-${k}.webp`; }); }, H.classList.contains('abierto') ? 0 : 2200); }, { rootMargin: '300px' }).observe(wow);
-  $$('.gustos button', wow).forEach(b => b.addEventListener('click', () => { st[st.lado] = b.dataset.g; pintar(); }));
-  $$('.mitades button', wow).forEach(b => b.addEventListener('click', () => { st.lado = b.dataset.lado; pintar(); }));
-  $$('.mitad', wow).forEach(m => m.addEventListener('click', () => { st.lado = m.dataset.lado; pintar(); }));
-  $('[data-menos]', wow).addEventListener('click', () => { st.n = Math.max(1, st.n - 1); pintar(true); });
-  $('[data-mas]', wow).addEventListener('click', () => { st.n = Math.min(12, st.n + 1); pintar(true); });
+  cuandoCerca(cu, () => { pesoFoto($('#imgC', cu), 'napolitana'); pesoFoto($('#imgD', cu), 'gringa'); });
+  $('[data-menos]', cu).addEventListener('click', () => { st.n = Math.max(1, st.n - 1); pintar(true); });
+  $('[data-mas]', cu).addEventListener('click', () => { st.n = Math.min(12, st.n + 1); pintar(true); });
 
-  function pintar(golpe) {
-    if (cerca) { $('#imgA', wow).setAttribute('href', `img/top/top-${st.a}.webp`); $('#imgB', wow).setAttribute('href', `img/top/top-${st.b}.webp`); }
-    $$('.mitades button', wow).forEach(b => { b.setAttribute('aria-pressed', b.dataset.lado === st.lado); b.querySelector('em').textContent = GUSTOS[st[b.dataset.lado]][0]; });
-    $$('.marco-sel', wow).forEach(m => m.classList.toggle('on', m.dataset.lado === st.lado));
-    $$('.gustos button', wow).forEach(b => b.setAttribute('aria-pressed', b.dataset.g === st[st.lado]));
-    sillas.forEach((b, i) => b.classList.toggle('on', i < st.n));
-    const milas = Math.ceil(st.n / RINDE), sobran = milas * RINDE - st.n;
-    $('b', sello).textContent = st.n;
-    $('small', sello).textContent = st.n === 1 ? 'persona' : 'personas';
-    if (golpe) { sello.classList.remove('pum'); void sello.offsetWidth; sello.classList.add('pum'); }
-    xm.textContent = '×' + milas; xm.classList.toggle('on', milas > 1);
-    const [na] = GUSTOS[st.a], [nb] = GUSTOS[st.b];
-    $('.t-n', wow).textContent = st.a === st.b ? `Mila-grosa ${na}` : `Mila-grosa ${na} + ${nb}`;
-    $('.t-d', wow).textContent = GUSTOS[st[st.lado]][1];
-    const sob = sobran ? ` y sobra${sobran > 1 ? 'n' : ''} ${sobran} porci${sobran > 1 ? 'ones' : 'ón'}` : '';
-    $('.t-r', wow).innerHTML = st.n <= RINDE ? `${st.n === 1 ? 'Sos 1' : 'Son ' + st.n}: <strong>con una Mila-grosa comen todos</strong>${sob}.` : `Son ${st.n}: <strong>pidan ${milas} Mila-grosas</strong>${sob}.`;
-    $('.stepper span', wow).textContent = `${st.n} ${st.n === 1 ? 'persona' : 'personas'}`;
-    const cta = $('[data-mesa-para]', wow); cta.textContent = `Reservar mesa para ${st.n}`; cta.dataset.n = st.n;
+  // qué recomienda la casa según cuántos son
+  function receta(n) {
+    const r = [];
+    if (n === 1) r.push({ c: 1, t: 'Milanesa individual', d: 'Con fritas, ensalada o puré', p: 26000, desde: true });
+    else {
+      const g = n === 2 ? 1 : Math.ceil(n / RINDE);
+      r.push({ c: g, t: g === 1 ? 'Milanesa gigante' : 'Milanesas gigantes', d: n === 2 ? 'Para los dos, y lo que sobra se lo llevan' : g > 1 ? 'Pidan una mitad y mitad: prueban más gustos' : 'Entera o mitad y mitad', p: 55000, desde: true, link: true });
+    }
+    if (n >= 3 && n < 6) r.push({ c: 1, t: 'Papas Bodegón', d: 'Crema de verdeo, panceta y alioli, al centro', p: 14000 });
+    if (n >= 6) { const k = n >= 10 ? 2 : 1; r.push({ c: k, t: k > 1 ? 'Picadas Bodegón' : 'Picada Bodegón', d: 'Rabas, albóndigas, buñuelos y más, para arrancar', p: 53000 }); }
+    return r;
+  }
+  function pintar(g) {
+    const n = st.n, r = receta(n);
+    sillas.forEach((b, i) => b.classList.toggle('on', i < n));
+    $('b', sello).textContent = n; $('small', sello).textContent = n === 1 ? 'persona' : 'personas';
+    if (g) golpe(sello);
+    const gig = r[0].t.startsWith('Milanesa') && n > 1 ? r[0].c : 0;
+    xm.textContent = '×' + gig; xm.classList.toggle('on', gig > 1);
+    $('.t-l', cu).innerHTML = r.map(x => `<li><b>${x.c}</b><div><strong>${x.t}</strong><small>${x.d}${x.link ? ' · <a href="#mila">armala ↑</a>' : ''}</small></div><span>${x.desde ? 'desde ' : ''}${pesos(x.p * x.c)}</span></li>`).join('');
+    const total = r.reduce((s, x) => s + x.p * x.c, 0);
+    $('[data-total]', cu).textContent = 'desde ' + pesos(total);
+    $('[data-pp]', cu).textContent = n > 1 ? `Unos ${pesos(Math.round(total / n / 500) * 500)} por persona.` : '';
+    $('.stepper span', cu).textContent = `${n} ${n === 1 ? 'persona' : 'personas'}`;
+    const cta = $('[data-mesa-para]', cu); cta.textContent = `Reservar mesa para ${n}`; cta.dataset.n = n;
   }
   pintar();
 }
